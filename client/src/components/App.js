@@ -1,7 +1,8 @@
 import React from 'react';
+import Start from './Start';
 
 function App() {
-  return <div>This is my app.</div>;
+  return <Start />;
 }
 
 export default App;
