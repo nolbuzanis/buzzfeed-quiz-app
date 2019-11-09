@@ -2,9 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 
 module.exports = (req, res, next) => {
-  //res.send(req.body.url);
   axios
-    .get(req.body.url)
+    .get(req.body.url || req.query.url)
     .then(response => {
       if (response.status !== 200) {
         //Response was not sucessful, return error

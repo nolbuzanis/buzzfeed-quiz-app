@@ -1,6 +1,8 @@
 import React from 'react';
 import './Home.css';
 import newspaperBG from './img/newspaper-background.jpg';
+import { connect } from 'react-redux';
+import { generateQuiz } from '../actions';
 
 class Start extends React.Component {
   state = {
@@ -35,7 +37,7 @@ class Start extends React.Component {
             ></input>
             <button
               className='start-quiz-button'
-              onClick={() => console.log('Button clicked!')}
+              onClick={() => this.props.generateQuiz(this.state.urlInput)}
             >
               Take Quiz
             </button>
@@ -46,4 +48,7 @@ class Start extends React.Component {
   }
 }
 
-export default Start;
+export default connect(
+  null,
+  { generateQuiz }
+)(Start);

@@ -5,9 +5,10 @@ const bodyParser = require('body-parser');
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 const scraper = require('./util/scraper');
-app.get('/quiz', scraper);
+app.get('/api/quiz', scraper);
 
 app.get('/', (req, res, next) => {
   res.send('Home Route');
