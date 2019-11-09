@@ -54,10 +54,20 @@ input::placeholder {
   width: 250px;
   color: white;
   text-align: center;
-
   font-size: 20px;
   border: none;
   background: linear-gradient(45deg, #73a5fd, #58c6f7);
+  opacity: 1;
+}
+
+button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+  transition: all ease 0.3s;
+}
+
+button:focus {
+  outline: none;
 }
 
 .input-container {

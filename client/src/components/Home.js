@@ -33,7 +33,12 @@ class Start extends React.Component {
               value={this.state.urlInput}
               onChange={e => this.setState({ urlInput: e.target.value })}
             ></input>
-            <button className='start-quiz-button'>Take Quiz</button>
+            <button
+              className='start-quiz-button'
+              onClick={() => console.log('Button clicked!')}
+            >
+              Take Quiz
+            </button>
           </div>
         </div>
       </div>
