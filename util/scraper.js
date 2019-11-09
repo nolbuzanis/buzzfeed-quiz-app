@@ -17,22 +17,89 @@ module.exports = (req, res, next) => {
       const quizTitle = $('.buzz-title').text();
 
       let questionTitles = [];
+      let questionAnswers = new Array();
 
       if ($('.iq-question-header').length === 0) {
         // If quiz is like the 2nd one, it needs to be queried by .subbuzz-quiz__question-header
-        $('.subbuzz-quiz__question-header')
-          .find('p')
-          .each((index, element) => {
-            questionTitles.push($(element).text());
-          });
+
+        const quizLength = $('.subbuzz-quiz__question').length;
+        questionAnswers = new Array(quizLength);
+        // Loop through each quiz element
+        $('.subbuzz-quiz__question').each((i, element) => {
+          //Scrape question titles
+          $(element)
+            .find('.subbuzz-quiz__question-header')
+            .find('p')
+            .each((index, element) => {
+              questionTitles.push($(element).text());
+            });
+
+          // Scrap quiz answers
+          questionAnswers[i] = new Array();
+          $(element)
+            .find('.subbuzz-quiz__answer')
+            .find('p')
+            .each((index, element) => {
+              questionAnswers[i].push({
+                text: $(element)
+                  .text()
+                  .replace(/[\n]/g, '')
+                  .trim()
+              });
+            });
+        });
       } else {
-        $('.iq-question-header')
-          .find('span')
-          .each((index, element) => {
-            questionTitles.push($(element).text());
-          });
+        const quizLength = $('.iq-question').length;
+        questionAnswers = new Array(quizLength);
+        // Loop through each quiz element
+        $('.iq-question').each((i, element) => {
+          console.log('In element: ', i);
+          $(element)
+            .find('.iq-question-header')
+            .find('span')
+            .each((index, element) => {
+              questionTitles.push($(element).text());
+            });
+
+          // Scrap quiz answers
+          questionAnswers[i] = new Array();
+
+          $(element)
+            .find('li')
+            .each((answerIndex, element) => {
+              // Check if photos & text is present
+              if (
+                $(element).find('.image-tile__image').length !== 0 &&
+                $(element).find('.xbold').length !== 0
+              ) {
+                questionAnswers[i].push({
+                  img: $(element)
+                    .find('.image-tile__image')
+                    .css('background-image')
+                    .replace(/url\(|\)/g, ''),
+                  text: $(element)
+                    .find('.xbold')
+                    .text()
+                });
+              } else if ($(element).find('.xbold').length !== 0) {
+                // If multiple text is present, chose only the bolded text which has the answer. Non bolded text is the Unsplash img tag.
+                questionAnswers[i].push({
+                  text: $(element)
+                    .find('.xbold')
+                    .text()
+                });
+              } else {
+                questionAnswers[i].push({ text: $(element).text() });
+              }
+            });
+        });
       }
-      res.status(200).json({ title: quizTitle, questions: questionTitles });
+
+      res.status(200).json({
+        title: quizTitle,
+        questions: questionTitles,
+        answers: questionAnswers
+      });
     })
     .catch(err => {
       res.status(500).json({ error: err });
