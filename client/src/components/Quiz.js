@@ -1,5 +1,7 @@
 import React from 'react';
 import './Quiz.css';
+import QuizChoice from './QuizChoice';
+import { connect } from 'react-redux';
 
 class Quiz extends React.Component {
   render() {
@@ -8,7 +10,7 @@ class Quiz extends React.Component {
         <div className='question-header'>Quiz question?</div>
         <div className='question-choices ui equal width grid'>
           <div className='equal width row'>
-            <div className='column'>Choice 1</div>
+            <QuizChoice />
             <div className='column'>Choice 1</div>
             <div className='column'>Choice 1</div>
           </div>
@@ -23,4 +25,8 @@ class Quiz extends React.Component {
   }
 }
 
-export default Quiz;
+const mapStateToProps = state => {
+  return { quiz: state.quiz };
+};
+
+export default connect(mapStateToProps)(Quiz);
