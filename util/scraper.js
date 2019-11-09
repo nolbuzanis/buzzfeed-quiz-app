@@ -13,29 +13,26 @@ module.exports = (req, res, next) => {
           .json({ message: 'internal server error', error: response.error });
       }
       const $ = cheerio.load(response.data);
+      // scrape quiz title
       const quizTitle = $('.buzz-title').text();
-      if ($('.iq-question-header').length === 0) {
-        // Quiz is like the 2nd one, it needs to be queried by .subbuzz-quiz__question-header
-        console.log($('.subbuzz-quiz__question-header').length);
-        res.send('test');
-      }
 
       let questionTitles = [];
-      $('.iq-question-header')
-        .find('span')
-        .each((index, element) => {
-          questionTitles.push($(element).text());
-        });
-      //const questions = $.find('iq-question-header').text();
-      /*
-      let questions = [];
-      $('.iq-question-header').each((i, elem) => {
-        console.log(elem.children);
-        questions[i] = elem.text();
-      });
-      const question2 = $('.iq-question-header').html();
-*/
-      res.send(questionTitles);
+
+      if ($('.iq-question-header').length === 0) {
+        // If quiz is like the 2nd one, it needs to be queried by .subbuzz-quiz__question-header
+        $('.subbuzz-quiz__question-header')
+          .find('p')
+          .each((index, element) => {
+            questionTitles.push($(element).text());
+          });
+      } else {
+        $('.iq-question-header')
+          .find('span')
+          .each((index, element) => {
+            questionTitles.push($(element).text());
+          });
+      }
+      res.status(200).json({ title: quizTitle, questions: questionTitles });
     })
     .catch(err => {
       res.status(500).json({ error: err });
