@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css';
-import newspaperBG from './img/newspaper-background.jpg';
+import newspaperBG from '../img/newspaper-background.jpg';
 import { connect } from 'react-redux';
 import { generateQuiz } from '../actions';
 
