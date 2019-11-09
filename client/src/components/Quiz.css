@@ -5,10 +5,34 @@
   height: 110px;
   background: black;
   color: white;
-  font-size: 40px;
+  font-size: 24px;
   line-height: 110px;
 }
 
-.row {
+.choice-element {
+  background: black;
   height: 176px;
+  box-sizing: border-box;
+}
+
+.choice-element span {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding-top: 25%;
+}
+
+.width-33 {
+  width: 33.333%;
+}
+.width-50 {
+  width: 50%;
+}
+
+.question-choices {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  color: white;
 }
