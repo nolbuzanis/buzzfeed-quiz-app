@@ -19,7 +19,7 @@ class Quiz extends React.Component {
   };
 
   renderQuizChoices = choices => {
-    if (!choices.length) {
+    if (!choices) {
       // Undefined, return null
       return null;
     }
