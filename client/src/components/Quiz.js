@@ -13,9 +13,8 @@ class Quiz extends React.Component {
     });
   }
 
-  onSubmitAnswer = (answerIndex, questionIndex) => {
-    console.log(answerIndex, questionIndex);
-    this.props.submitAnswer(questionIndex, answerIndex);
+  onSubmitAnswer = (answerIndex, questionIndex, lengthOfQuiz) => {
+    this.props.submitAnswer(questionIndex, answerIndex, lengthOfQuiz);
   };
 
   renderQuizChoices = choices => {
@@ -34,7 +33,11 @@ class Quiz extends React.Component {
             key={index}
             randColor={this.state.randColor}
             onclick={() =>
-              this.onSubmitAnswer(index, this.props.quiz.currentQuestion)
+              this.onSubmitAnswer(
+                index,
+                this.props.quiz.currentQuestion,
+                this.props.quiz.data.questions.length
+              )
             }
           />
         );
@@ -62,10 +65,6 @@ class Quiz extends React.Component {
       return null;
     }
     const { currentQuestion, data } = this.props.quiz;
-
-    if (currentQuestion + 1 > data.questions.length) {
-      this.props.history.push('/results');
-    }
 
     return (
       <div>

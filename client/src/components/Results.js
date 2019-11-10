@@ -4,8 +4,6 @@ import './Results.css';
 import { connect } from 'react-redux';
 
 class Results extends React.Component {
-  componentWillMount() {}
-
   renderResultsGrid = () => {
     const { user, data } = this.props.quiz;
     if (!user) {
@@ -14,6 +12,7 @@ class Results extends React.Component {
     return user.map(choice => {
       return (
         <ResultsCard
+          key={choice.qIndex}
           question={data.questions[choice.qIndex]}
           answer={data.answers[choice.qIndex][choice.aIndex]}
         />
