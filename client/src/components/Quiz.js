@@ -19,6 +19,11 @@ class Quiz extends React.Component {
   };
 
   renderQuizChoices = choices => {
+    if (!choices.length) {
+      // Undefined, return null
+      return null;
+    }
+
     if (choices.length > 4) {
       return choices.map((choice, index) => {
         return (
@@ -59,7 +64,7 @@ class Quiz extends React.Component {
     const { currentQuestion, data } = this.props.quiz;
 
     if (currentQuestion + 1 > data.questions.length) {
-      return <div>Finished!</div>;
+      this.props.history.push('/results');
     }
 
     return (
