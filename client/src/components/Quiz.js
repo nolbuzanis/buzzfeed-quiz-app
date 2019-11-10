@@ -57,6 +57,11 @@ class Quiz extends React.Component {
       return null;
     }
     const { currentQuestion, data } = this.props.quiz;
+
+    if (currentQuestion + 1 > data.questions.length) {
+      return <div>Finished!</div>;
+    }
+
     return (
       <div>
         <div

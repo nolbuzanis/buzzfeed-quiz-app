@@ -13,6 +13,7 @@
   background: black;
   height: 176px;
   box-sizing: border-box;
+  background-size: cover;
 }
 
 .choice-element span {
