@@ -13,14 +13,22 @@
   background: black;
   height: 176px;
   box-sizing: border-box;
-  background-size: cover;
+  background-size: cover !important;
+  cursor: pointer;
+  transition: all ease 0.3s;
+  opacity: 1;
+}
+.choice-element:hover {
+  opacity: 0.8;
+  transition: all ease 0.3s;
 }
 
 .choice-element span {
   display: block;
   width: 100%;
   text-align: center;
-  padding-top: 25%;
+  padding-top: 70px;
+  font-size: 20px;
 }
 
 .width-33 {

@@ -14,8 +14,7 @@ const QuizChoice = props => {
             ? `url('${props.img}') center center no-repeat`
             : props.randColor
         }`,
-        backgroundSize: `${props.img ? 'cover' : 'auto'}`,
-        border: `${props.img ? 'none' : '1px solid black'}`
+        border: `${props.img ? 'none' : '3px solid black'}`
       }}
     >
       <span>{props.text}</span>
