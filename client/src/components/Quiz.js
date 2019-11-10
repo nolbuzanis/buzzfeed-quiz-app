@@ -13,8 +13,18 @@ class Quiz extends React.Component {
     });
   }
 
-  onSubmitAnswer = (answerIndex, questionIndex, lengthOfQuiz) => {
-    this.props.submitAnswer(questionIndex, answerIndex, lengthOfQuiz);
+  onSubmitAnswer = (answerIndex, questionIndex) => {
+    //Set new random color for next question
+    this.setState({
+      randColor: `rgba(${Math.random() * 255}, ${Math.random() *
+        255}, ${Math.random() * 255})`
+    });
+    //Update redux store and currentQuestion variable
+    this.props.submitAnswer(
+      questionIndex,
+      answerIndex,
+      this.props.quiz.data.questions.length
+    );
   };
 
   renderQuizChoices = choices => {
@@ -33,11 +43,7 @@ class Quiz extends React.Component {
             key={index}
             randColor={this.state.randColor}
             onclick={() =>
-              this.onSubmitAnswer(
-                index,
-                this.props.quiz.currentQuestion,
-                this.props.quiz.data.questions.length
-              )
+              this.onSubmitAnswer(index, this.props.quiz.currentQuestion)
             }
           />
         );

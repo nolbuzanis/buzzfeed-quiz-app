@@ -4,6 +4,12 @@ import './Results.css';
 import { connect } from 'react-redux';
 
 class Results extends React.Component {
+  componentDidMount() {
+    if (!this.props.quiz.user) {
+      this.props.history.push('/');
+    }
+  }
+
   renderResultsGrid = () => {
     const { user, data } = this.props.quiz;
     if (!user) {
