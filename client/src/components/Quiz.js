@@ -13,12 +13,14 @@ class Quiz extends React.Component {
     });
   }
 
-  renderQuizChoices = choices => {
-    console.log(choices);
+  onSubmitAnswer = (answerIndex, questionIndex) => {
+    console.log(answerIndex, questionIndex);
+    this.props.submitAnswer(questionIndex, answerIndex);
+  };
 
+  renderQuizChoices = choices => {
     if (choices.length > 4) {
       return choices.map((choice, index) => {
-        console.log(choice);
         return (
           <QuizChoice
             text={choice.text}
@@ -26,17 +28,24 @@ class Quiz extends React.Component {
             width={33}
             key={index}
             randColor={this.state.randColor}
+            onclick={() =>
+              this.onSubmitAnswer(index, this.props.quiz.currentQuestion)
+            }
           />
         );
       });
     } else {
-      return choices.map(choice => {
+      return choices.map((choice, index) => {
         return (
           <QuizChoice
             text={choice.text}
             img={choice.img}
             width={50}
+            key={index}
             randColor={this.state.randColor}
+            onclick={() =>
+              this.onSubmitAnswer(index, this.props.quiz.currentQuestion)
+            }
           />
         );
       });

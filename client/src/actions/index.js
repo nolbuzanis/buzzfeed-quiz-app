@@ -2,9 +2,13 @@ import { SUBMIT_ANSWER, GET_QUIZ } from './types.js';
 import axios from 'axios';
 import history from '../history';
 
-export const submitAnswer = () => {
-  console.log();
-  return { type: SUBMIT_ANSWER, payload: 'A' };
+export const submitAnswer = (questionIndex, answerIndex) => {
+  //Store question and answer index
+  //Then increment currentQuestion state by 1
+  return {
+    type: SUBMIT_ANSWER,
+    payload: { qIndex: questionIndex, aIndex: answerIndex }
+  };
 };
 
 export const generateQuiz = url => async dispatch => {

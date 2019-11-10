@@ -4,6 +4,7 @@ import './Quiz.css';
 const QuizChoice = props => {
   return (
     <div
+      onClick={props.onclick}
       className={`choice-element column ${
         props.width === 50 ? 'width-50' : 'width-33'
       }`}
@@ -14,7 +15,7 @@ const QuizChoice = props => {
             : props.randColor
         }`,
         backgroundSize: 'cover',
-        border: `${props.img ? 'none' : '1px solid white'}`
+        border: `${props.img ? 'none' : '1px solid black'}`
       }}
     >
       <span>{props.text}</span>
