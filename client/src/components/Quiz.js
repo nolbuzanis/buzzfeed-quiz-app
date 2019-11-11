@@ -78,7 +78,7 @@ class Quiz extends React.Component {
           className='question-header'
           style={{ color: this.state.randColor }}
         >
-          {data.questions[currentQuestion]}
+          <span>{data.questions[currentQuestion]}</span>
         </div>
         <div className='question-choices'>
           {this.renderQuizChoices(data.answers[currentQuestion])}

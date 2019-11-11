@@ -10,6 +10,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const scraper = require('./util/scraper');
 app.get('/api/quiz', scraper);
 
+const emailer = require('./util/mailer');
+app.post('/email', emailer);
+
 app.get('/', (req, res, next) => {
   res.send('Home Route');
 });

@@ -1,12 +1,19 @@
 .question-header {
-  display: block;
+  display: flex;
   text-align: center;
   width: 100%;
   height: 110px;
   background: black;
   color: white;
+  align-content: center;
+  align-items: center;
+  padding: 0 15px;
+}
+.question-header span {
   font-size: 24px;
-  line-height: 110px;
+  line-height: 30px;
+  text-align: center;
+  width: 100%;
 }
 
 .choice-element {
