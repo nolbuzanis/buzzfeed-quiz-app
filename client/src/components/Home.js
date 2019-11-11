@@ -35,7 +35,7 @@ class Start extends React.Component {
           <h1>quizzical.</h1>
 
           <h3>
-            (adj.) <br /> expressing slight uncertainty or amusement.
+            a <span style={{ color: '#EE3322' }}>BuzzFeed</span> quiz app
           </h3>
           <div className='input-container'>
             {this.showErrors()}
