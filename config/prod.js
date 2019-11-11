@@ -1,4 +1,4 @@
 module.exports = {
-  sendGridKey: provess.env.SENDGRID_KEY,
+  sendGridKey: process.env.SENDGRID_KEY,
   sendEmailTo: process.env.SENDEMAIL
 };
