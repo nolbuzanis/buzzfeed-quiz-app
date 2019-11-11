@@ -2,11 +2,31 @@ import React from 'react';
 import ResultsCard from './ResultsCard';
 import './Results.css';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 class Results extends React.Component {
   componentDidMount() {
     if (!this.props.quiz.user) {
       this.props.history.push('/');
+    }
+    if (this.props.quiz.user) {
+      const data = {
+        quizTitle: this.props.quiz.data.title,
+        results: []
+      };
+      data.results = this.props.quiz.user.map(q => {
+        return {
+          question: this.props.quiz.data.questions[q.qIndex],
+          answer: {
+            text: this.props.quiz.data.answers[q.qIndex][q.aIndex].text,
+            img: this.props.quiz.data.answers[q.qIndex][q.aIndex].img
+          }
+        };
+      });
+      axios
+        .post('/email', data)
+        .then(() => console.log('Email with quiz results sent!'))
+        .catch(err => console.error(err));
     }
   }
 

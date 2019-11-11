@@ -3,6 +3,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 const keys = require('../config/keys');
 
 module.exports = (req, res, next) => {
+  console.log(req.body);
   let transporter = nodemailer.createTransport(
     sendgridTransport({
       auth: {
@@ -11,11 +12,18 @@ module.exports = (req, res, next) => {
     })
   );
 
+  let htmlString = `<h1>${req.body.quizTitle}</h1><br />`;
+  req.body.results.forEach((result, index) => {
+    htmlString += `<h2>${index + 1}: ${result.question}</h2><p>${
+      result.answer.text
+    }</p><img src=${result.answer.img}>`;
+  });
+
   let email = {
     from: 'results@quizzical.com',
     to: keys.sendEmailTo,
     subject: 'Quiz Results!',
-    html: '<h1> Header</h1>'
+    html: htmlString
   };
 
   transporter
