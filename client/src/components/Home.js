@@ -9,6 +9,16 @@ class Start extends React.Component {
     urlInput: ''
   };
 
+  showErrors = () => {
+    if (this.props.quiz.error) {
+      return (
+        <p style={{ paddingTop: '20px', color: '#bb0000', textAlign: 'right' }}>
+          {this.props.quiz.error}
+        </p>
+      );
+    }
+  };
+
   render() {
     return (
       <div>
@@ -28,6 +38,7 @@ class Start extends React.Component {
             (adj.) <br /> expressing slight uncertainty or amusement.
           </h3>
           <div className='input-container'>
+            {this.showErrors()}
             <input
               className='url-input'
               type='text'
@@ -48,7 +59,11 @@ class Start extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return { quiz: state.quiz };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { generateQuiz }
 )(Start);

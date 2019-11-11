@@ -1,4 +1,4 @@
-import { SUBMIT_ANSWER, GET_QUIZ } from '../actions/types';
+import { SUBMIT_ANSWER, GET_QUIZ, QUIZ_ERROR } from '../actions/types';
 
 export default (state = {}, action) => {
   switch (action.type) {
@@ -11,6 +11,9 @@ export default (state = {}, action) => {
         user: [...state.user, action.payload],
         currentQuestion: state.currentQuestion + 1
       };
+    }
+    case QUIZ_ERROR: {
+      return { ...state, error: action.payload };
     }
     default: {
       return state;

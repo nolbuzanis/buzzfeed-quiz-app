@@ -1,4 +1,4 @@
-import { SUBMIT_ANSWER, GET_QUIZ } from './types.js';
+import { SUBMIT_ANSWER, GET_QUIZ, QUIZ_ERROR } from './types.js';
 import axios from 'axios';
 import history from '../history';
 
@@ -27,5 +27,6 @@ export const generateQuiz = url => async dispatch => {
     dispatch({ type: GET_QUIZ, payload: response.data });
   } catch (err) {
     console.error(err);
+    dispatch({ type: QUIZ_ERROR, payload: 'URL was invalid.' });
   }
 };
