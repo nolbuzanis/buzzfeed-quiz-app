@@ -13,10 +13,6 @@ app.get('/api/quiz', scraper);
 const emailer = require('./util/mailer');
 app.post('/email', emailer);
 
-app.get('/', (req, res, next) => {
-  res.send('Home Route');
-});
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, (req, res, next) => {
