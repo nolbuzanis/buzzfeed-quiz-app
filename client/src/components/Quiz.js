@@ -78,7 +78,14 @@ class Quiz extends React.Component {
           className='question-header'
           style={{ color: this.state.randColor }}
         >
-          <span>{data.questions[currentQuestion]}</span>
+          <span>{data.questions[currentQuestion].text}</span>
+          <div
+            style={{
+              height: '100%',
+              width: `${data.questions[currentQuestion].img ? '200px' : '0px'}`,
+              background: `url('${data.questions[currentQuestion].img}') center center no-repeat`
+            }}
+          ></div>
         </div>
         <div className='question-choices'>
           {this.renderQuizChoices(data.answers[currentQuestion])}

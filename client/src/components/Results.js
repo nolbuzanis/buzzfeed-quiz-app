@@ -16,7 +16,10 @@ class Results extends React.Component {
       };
       data.results = this.props.quiz.user.map(q => {
         return {
-          question: this.props.quiz.data.questions[q.qIndex],
+          question: {
+            text: this.props.quiz.data.questions[q.qIndex].text,
+            img: this.props.quiz.data.questions[q.qIndex].img
+          },
           answer: {
             text: this.props.quiz.data.answers[q.qIndex][q.aIndex].text,
             img: this.props.quiz.data.answers[q.qIndex][q.aIndex].img

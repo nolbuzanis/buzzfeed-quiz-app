@@ -30,6 +30,7 @@
   padding-top: 35px;
   padding-left: 30px;
   font-weight: 300;
+  max-width: 600px;
 }
 
 .results-card {
