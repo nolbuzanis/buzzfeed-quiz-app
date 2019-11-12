@@ -27,22 +27,30 @@ module.exports = (req, res, next) => {
         $('.subbuzz-quiz__question').each((i, element) => {
           //Scrape question titles
 
-          if ($(element).find('.subbuzz__title--question').length !== 0) {
-            questionTitles.push(
-              $(element)
-                .find('.subbuzz__title--question')
-                .text()
-                .replace(/[\n]/g, '')
-                .trim()
-            );
-          } else {
-            questionTitles.push(
-              $(element)
-                .find('p')
-                .text()
-                .replace(/[\n]/g, '')
-                .trim()
-            );
+          if ($(element).find('.subbuzz-quiz__question-header').length !== 0) {
+            if ($(element).find('.quiz-v3-question').length !== 0) {
+              questionTitles.push({
+                text: $(element)
+                  .find('.quiz-v3-question')
+                  .find('p')
+                  .text()
+                  .replace(/[\n]/g, '')
+                  .trim(),
+                img: ''
+              });
+            } else {
+              questionTitles.push({
+                text: $(element)
+                  .find('.subbuzz__title--question')
+                  .text()
+                  .replace(/[\n]/g, '')
+                  .trim(),
+                img: $(element)
+                  .find('.subbuzz-quiz__question-header')
+                  .find('img')
+                  .attr('data-src')
+              });
+            }
           }
 
           // Scrap quiz answers
@@ -71,13 +79,13 @@ module.exports = (req, res, next) => {
         questionAnswers = new Array(quizLength);
         // Loop through each quiz element
         $('.iq-question').each((i, element) => {
-          console.log('In element: ', i);
-          $(element)
-            .find('.iq-question-header')
-            .find('span')
-            .each((index, element) => {
-              questionTitles.push($(element).text());
-            });
+          //Quiz question
+          questionTitles.push({
+            text: $(element)
+              .find('.iq-question-header')
+              .find('span')
+              .text()
+          });
 
           // Scrap quiz answers
           questionAnswers[i] = new Array();
