@@ -26,19 +26,30 @@ module.exports = (req, res, next) => {
         // Loop through each quiz element
         $('.subbuzz-quiz__question').each((i, element) => {
           //Scrape question titles
-          $(element)
-            .find('.subbuzz-quiz__question-header')
-            .find('p')
-            .each((index, element) => {
-              questionTitles.push($(element).text());
-            });
+
+          if ($(element).find('.subbuzz__title--question').length !== 0) {
+            questionTitles.push(
+              $(element)
+                .find('.subbuzz__title--question')
+                .text()
+                .replace(/[\n]/g, '')
+                .trim()
+            );
+          } else {
+            questionTitles.push(
+              $(element)
+                .find('p')
+                .text()
+                .replace(/[\n]/g, '')
+                .trim()
+            );
+          }
 
           // Scrap quiz answers
           questionAnswers[i] = new Array();
           $(element)
             .find('.subbuzz-quiz__answer')
             .each((index, element) => {
-              console.log($(element).find('img'));
               questionAnswers[i].push({
                 text: $(element)
                   .find('p')
