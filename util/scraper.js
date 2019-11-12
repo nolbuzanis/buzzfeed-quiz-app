@@ -45,9 +45,13 @@ module.exports = (req, res, next) => {
                   .text()
                   .replace(/[\n]/g, '')
                   .trim(),
-                img: $(element)
-                  .find('img')
-                  .attr('data-src')
+                img:
+                  $(element)
+                    .find('img')
+                    .attr('data-src') ||
+                  $(element)
+                    .find('img')
+                    .attr('src')
               });
             });
         });
