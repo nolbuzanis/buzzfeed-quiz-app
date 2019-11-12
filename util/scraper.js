@@ -37,13 +37,17 @@ module.exports = (req, res, next) => {
           questionAnswers[i] = new Array();
           $(element)
             .find('.subbuzz-quiz__answer')
-            .find('p')
             .each((index, element) => {
+              console.log($(element).find('img'));
               questionAnswers[i].push({
                 text: $(element)
+                  .find('p')
                   .text()
                   .replace(/[\n]/g, '')
-                  .trim()
+                  .trim(),
+                img: $(element)
+                  .find('img')
+                  .attr('data-src')
               });
             });
         });
