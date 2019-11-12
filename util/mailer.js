@@ -14,7 +14,9 @@ module.exports = (req, res, next) => {
 
   let htmlString = `<h1>${req.body.quizTitle}</h1><br />`;
   req.body.results.forEach((result, index) => {
-    htmlString += `<h2>${index + 1}: ${result.question}</h2><p>${
+    htmlString += `<h2>${index + 1}: ${
+      result.question.text
+    }</h2><img style="height:30px;" src=${result.question.img}><p>${
       result.answer.text
     }</p><img src=${result.answer.img}>`;
   });
