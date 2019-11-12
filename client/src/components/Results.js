@@ -59,6 +59,7 @@ class Results extends React.Component {
           <div className='results-quiz-title'>
             {quiz.data ? quiz.data.title : ''}
           </div>
+          <a href='/'>Take another quiz</a>
         </div>
         <div className='results-content'>{this.renderResultsGrid()}</div>
       </div>
